@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-
-  {%- include head.html -%}
-
+<html>
+  {% include head.html %}
   <body>
+    {% include nav.html %}
 
-    {%- include header.html -%}
+    {% if page.toc==true %}
+      <aside class="toc">
+        {% include toc.html html=content %}
+      </aside>
+    {% endif %}
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
         {{ content }}
       </div>
-    </main>
+    </div>
 
-    {%- include footer.html -%}
-
+    {% include analytics.html %}
   </body>
+
+  {% if page.toc==true %}
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  {% endif %}
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      {% include footer.html %}
+    </footer>
+
 
 </html>
